@@ -83,12 +83,13 @@ func TestMsgAggregateExchangeRateVote(t *testing.T) {
 		exchangeRates string
 		expectPass    bool
 	}{
-		{addrs[0], "123", exchangeRates, true},
+		{addrs[0], "123a", exchangeRates, true},
 		{addrs[0], "123", invalidExchangeRates, false},
-		{addrs[0], "123", abstainExchangeRates, true},
+		{addrs[0], "123Z", abstainExchangeRates, true},
 		{addrs[0], "123", overFlowExchangeRates, false},
 		{sdk.AccAddress{}, "123", exchangeRates, false},
 		{addrs[0], "", exchangeRates, false},
+		{addrs[0], "123@s", exchangeRates, false},
 	}
 
 	for i, tc := range tests {

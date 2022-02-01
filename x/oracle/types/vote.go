@@ -63,7 +63,6 @@ func (tuples ExchangeRateTuples) String() string {
 
 // ParseExchangeRateTuples ExchangeRateTuple parser
 func ParseExchangeRateTuples(tuplesStr string) (ExchangeRateTuples, error) {
-	tuplesStr = strings.TrimSpace(tuplesStr)
 	if len(tuplesStr) == 0 {
 		return nil, nil
 	}

@@ -1,6 +1,8 @@
 package types
 
 import (
+	"regexp"
+
 	"github.com/tendermint/tendermint/crypto/tmhash"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -144,8 +146,13 @@ func (msg MsgAggregateExchangeRateVote) ValidateBasic() error {
 		}
 	}
 
-	if len(msg.Salt) > 4 || len(msg.Salt) < 1 {
-		return sdkerrors.Wrap(ErrInvalidSaltLength, "salt length must be [1, 4]")
+	if len(msg.Salt) > 32 || len(msg.Salt) < 1 {
+		return sdkerrors.Wrap(ErrInvalidSaltLength, "salt length must be [1, 32]")
+	}
+
+	ok, err := regexp.MatchString("^[0-9a-zA-Z]+$", msg.Salt)
+	if !ok || err != nil {
+		return sdkerrors.Wrap(ErrInvalidSaltLength, "salt must be formatted with /^[a-zA-Z]+$/")
 	}
 
 	return nil
