@@ -147,12 +147,12 @@ func (msg MsgAggregateExchangeRateVote) ValidateBasic() error {
 	}
 
 	if len(msg.Salt) != 32 {
-		return ErrInvalidSaltLength
+		return sdkerrors.Wrap(ErrInvalidSalt, "slat length must be 32")
 	}
 
 	ok, err := regexp.MatchString("^[0-9a-zA-Z]+$", msg.Salt)
 	if !ok || err != nil {
-		return sdkerrors.Wrap(ErrInvalidSaltLength, "salt must be formatted with /^[0-9a-zA-Z]+$/")
+		return sdkerrors.Wrap(ErrInvalidSalt, "salt must be formatted with /^[0-9a-zA-Z]+$/")
 	}
 
 	return nil
