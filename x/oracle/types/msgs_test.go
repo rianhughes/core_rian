@@ -83,13 +83,13 @@ func TestMsgAggregateExchangeRateVote(t *testing.T) {
 		exchangeRates string
 		expectPass    bool
 	}{
-		{addrs[0], "123a", exchangeRates, true},
-		{addrs[0], "123", invalidExchangeRates, false},
-		{addrs[0], "123Z", abstainExchangeRates, true},
-		{addrs[0], "123", overFlowExchangeRates, false},
-		{sdk.AccAddress{}, "123", exchangeRates, false},
+		{addrs[0], "123a123a123a123a123a123a123a123a", exchangeRates, true},
+		{addrs[0], "123a123a123a123a123a123a123a123a", invalidExchangeRates, false},
+		{addrs[0], "123Z123Z123Z123Z123Z123Z123Z123Z", abstainExchangeRates, true},
+		{addrs[0], "123Z123Z123Z123Z123Z123Z123Z123Z", overFlowExchangeRates, false},
+		{sdk.AccAddress{}, "123Z123Z123Z123Z123Z123Z123Z123Z", exchangeRates, false},
 		{addrs[0], "", exchangeRates, false},
-		{addrs[0], "123@s", exchangeRates, false},
+		{addrs[0], "123@123Z123Z123Z123Z123Z123Z123Z", exchangeRates, false},
 	}
 
 	for i, tc := range tests {
